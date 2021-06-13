@@ -1,0 +1,1199 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Genome\_regulatory\_circuits}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+Computational Systems Biology
+
+    \#\#
+
+Gene Regulatory Circuits Exercises
+
+\#\#\#\#
+
+Ferran Pegenaute, ferran.pegenaute01@estudiant.edu.upf
+
+    \subsubsection{Table of Content}\label{table-of-content}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{exercise-1}
+\item
+  Section \ref{exercise-2}
+\item
+  Section \ref{exercise-3}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{change-ak}
+  \item
+    Section \ref{change-as}
+  \item
+    Section \ref{change-bs}
+  \end{itemize}
+\end{itemize}
+
+    \subsubsection{Exercise 1 }\label{exercise-1}
+
+\textbf{Consider a gene whose expression is affected by a direct
+positive feedback, with Hill coefficient 2, maximum expression rate 1
+nM/s, activation threshold 100 nM, and degradation rate 0.001 s-1.
+Integrate the differential equation that represents the dynamics of the
+concentration of the expressed protein, and determine the threshold
+value of the initial condition that separates the basins of attraction
+of the two coexisting equilibrium states of the system.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{integrate} \PY{k}{import} \PY{n}{odeint}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+\end{Verbatim}
+
+
+    First, store the values given in the exercise in the corresponding
+variables:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Hill coefficient}
+        \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{2}
+        \PY{c+c1}{\PYZsh{} Maximum expression rate}
+        \PY{n}{b}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{} Activation threshold}
+        \PY{n}{K} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{c+c1}{\PYZsh{} Degradation rate}
+        \PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.001}
+\end{Verbatim}
+
+
+    Let's define the functions that return dx/dt:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{dx\PYZus{}dt}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{t}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{dxdt} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{b}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{K}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{o}{+} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{o}{*}\PY{n}{x}
+             \PY{k}{return} \PY{n}{dxdt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}time state}
+         \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{15000}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{n}{x0}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{x0}\PY{p}{:}
+             \PY{n}{y0} \PY{o}{=} \PY{n}{odeint}\PY{p}{(}\PY{n}{dx\PYZus{}dt}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{t}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{y0}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x(t)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x= }\PY{l+s+si}{\PYZpc{}.1f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{k}{x}])
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Positive feedback model for x = }\PY{l+s+si}{\PYZpc{}.1f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{x})
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n}{len\PYZus{}y0}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y0}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The function tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{y0}\PY{p}{[}\PY{n}{len\PYZus{}y0}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+             \PY{n}{y1}\PY{o}{=}\PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{y0}\PY{p}{[}\PY{n}{len\PYZus{}y0}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+The function tents to the value:  0.0003
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+The function tents to the value:  989.8974
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+The function tents to the value:  989.898
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The threshold value for the initial condition is: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{\PYZhy{}}\PY{n}{y1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The threshold values of the initial condition is:  10.102
+
+    \end{Verbatim}
+
+    By doing the integration of the differential equation that represent the
+concentration of the expresse protein, we found that the two equilibrium
+states of the systems are found at protein concentration of 0.003 nM and
+of 989.898 nM.
+
+The \textbf{threshold value is 10.102} approximately, as we can see on
+the above graphs obtained by changing the initial condition of the
+protein concentration. We have use the values 10, 50 and 1000 nM
+respectively
+
+    Observing the three plots with different possible initial conditions
+tend towards two different stable equilibriums of the system. The
+initial concentration 10, as it is lower than the threshold tends to a
+stable state of 0 nM and both the concentration 50 nM and 1000 nM tend
+to the value 989.898 nM, the former increasing the concentration while
+the latter decreasing it.
+
+    \subsubsection{Exercise 2 }\label{exercise-2}
+
+\textbf{Consider the following activator-repressor model discussed in
+class (slide titled ``From oscillations to pulses''):}
+
+\textbf{Simulate this model for the following parameter values: a2=0.025
+nM/s, b1=15 nM/s, b2=0.8 nM/s, d1=d2=5·10-5 s-1, g=2.5·10-7 nM-1s-1,
+K1=3000 nM, K2=750 nM, and n=m=2. Vary a1 as shown in the slides.
+Reproduce the dynamics obtained there.}
+
+    \begin{itemize}
+\tightlist
+\item
+  Fist we will define the function of the differential equation
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{K1} \PY{o}{=} \PY{l+m+mi}{3000}
+        \PY{n}{K2} \PY{o}{=} \PY{l+m+mi}{750}
+        \PY{n}{g} \PY{o}{=} \PY{l+m+mf}{2.5}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{)}
+        \PY{n}{b1} \PY{o}{=} \PY{l+m+mi}{15}
+        \PY{n}{b2} \PY{o}{=} \PY{l+m+mf}{0.8}
+        \PY{n}{d1} \PY{o}{=} \PY{n}{d2} \PY{o}{=} \PY{l+m+mi}{5}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{n} \PY{o}{=} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{y} \PY{o}{=} \PY{l+m+mf}{0.001}
+        \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{a2} \PY{o}{=} \PY{l+m+mf}{0.025}
+        
+        \PY{c+c1}{\PYZsh{} function that returns dx/dt and dy/dt}
+        \PY{k}{def} \PY{n+nf}{dx\PYZus{}dy}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{t}\PY{p}{,}\PY{n}{a1}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    ODE exercise 2}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            
+            \PY{n}{dxdt} \PY{o}{=} \PY{p}{(}\PY{n}{a1}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{b1}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{K1}\PY{o}{*}\PY{o}{*}\PY{n}{n} \PY{o}{+} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{d1}\PY{o}{*}\PY{n}{x}
+            \PY{n}{dydt} \PY{o}{=} \PY{p}{(}\PY{n}{a2}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{b2}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{n}{m}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{K2}\PY{o}{*}\PY{o}{*}\PY{n}{m} \PY{o}{+} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{n}{m}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{d2}\PY{o}{*}\PY{n}{y}
+        
+            \PY{k}{return} \PY{p}{[}\PY{n}{dxdt}\PY{p}{,} \PY{n}{dydt}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  We will set the initial state.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} initial state:}
+        \PY{n}{y0} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} time coodinate to solve the ODE for}
+        \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1000000}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Finally we will plot the dinamic of the
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{a1}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.005}\PY{p}{,}\PY{l+m+mf}{0.007}\PY{p}{,}\PY{l+m+mf}{0.01}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{a1}\PY{p}{:}
+            
+            \PY{n}{y1} \PY{o}{=} \PY{n}{odeint}\PY{p}{(}\PY{n}{dx\PYZus{}dy}\PY{p}{,} \PY{n}{y0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{p}{)}\PY{p}{)}  
+            \PY{n}{dx}\PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{dyy}\PY{o}{=}\PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dx}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dyy}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time (s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x(t) and y(t)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dxdt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dydt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Positive feedback model α1= }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{a})
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}oscillation}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dx}\PY{p}{,}\PY{n}{dyy}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dxdy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oscillation when α1= }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{a})
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As in the above plots, we use the same time frame and kept all the
+values the same except the a1 value which was modified in order to see
+how it affects the behaviour of the system. we could notice that If a1
+value increases from 0.005 to 0.01 and maintaining the same time frame,
+we get a more unstable behavior, where the number of pulses increase. In
+other words, when a1 get values higher than 0.005 the system is less
+clear and there are more number of oscillations.
+
+    \subsubsection{Exercise 3. }\label{exercise-3.}
+
+\textbf{The following model describes genetic competence in B.
+subtilis:}
+
+    \textbf{Simulate this model for the parameter values given in the table
+below:}
+
+    \textbf{Next, vary the parameters 𝛼k, 𝛼s and 𝛽s (one at a time) and
+study the response of the system in the different situations. Reproduce
+the different dynamical regimes studied in class.}
+
+    The K and S represent the concentrations of ComK and ComS in the cell,
+respectively. Their basal expression is represented by the parameters: *
+αk: Basal expression rate of ComK * αs: Basal expression rate of ComS,
+maximum rate of regulated expression:
+
+\begin{itemize}
+\tightlist
+\item
+  βk: Saturating expression rate of ComK positive feedback
+\item
+  βs: Unrepressed expression rate of ComS
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{bk} \PY{o}{=} \PY{l+m+mf}{7.5}
+        \PY{n}{dk} \PY{o}{=} \PY{n}{ds} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{kk}\PY{o}{=}\PY{l+m+mi}{5000}
+        \PY{n}{ks}\PY{o}{=} \PY{l+m+mi}{833}
+        \PY{n}{yk} \PY{o}{=} \PY{n}{ys} \PY{o}{=} \PY{l+m+mf}{0.001}
+        \PY{n}{Tk}\PY{o}{=}\PY{l+m+mi}{25000}
+        \PY{n}{Ts}\PY{o}{=}\PY{l+m+mi}{20}
+        \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{p}\PY{o}{=}\PY{l+m+mi}{5}
+        \PY{n}{ak} \PY{o}{=} \PY{l+m+mf}{0.0875}
+        \PY{n}{a\PYZus{}s} \PY{o}{=} \PY{l+m+mf}{0.0004}
+        
+        \PY{k}{def} \PY{n+nf}{dK\PYZus{}dS}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{t}\PY{p}{,}\PY{n}{a\PYZus{}k}\PY{p}{,}\PY{n}{a\PYZus{}s}\PY{p}{,}\PY{n}{bs}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    function that returns the ODE: dK/dt and dS/st}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{K}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            
+            \PY{n}{dKdt} \PY{o}{=} \PY{p}{(}\PY{n}{a\PYZus{}k}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{bk}\PY{o}{*}\PY{n}{K}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{kk}\PY{o}{*}\PY{o}{*}\PY{n}{n} \PY{o}{+} \PY{n}{K}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{yk}\PY{o}{*}\PY{n}{K}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{n}{K}\PY{o}{/}\PY{n}{Tk}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{n}{S}\PY{o}{/}\PY{n}{Ts}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{dk}\PY{o}{*}\PY{n}{K}
+            \PY{n}{dSdt} \PY{o}{=} \PY{p}{(}\PY{n}{a\PYZus{}s}\PY{o}{+}\PY{p}{(}\PY{n}{bs}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{p}{(}\PY{n}{K}\PY{o}{/}\PY{n}{ks}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{p}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{ys}\PY{o}{*}\PY{n}{S}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{n}{K}\PY{o}{/}\PY{n}{Tk}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{n}{S}\PY{o}{/}\PY{n}{Ts}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{ds}\PY{o}{*}\PY{n}{S}
+        
+            \PY{k}{return} \PY{p}{[}\PY{n}{dKdt}\PY{p}{,} \PY{n}{dSdt}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} initial state:}
+        \PY{n}{y0} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} time coodinate to solve the ODE for}
+        \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1000000}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} solve the ODE problem }
+         
+         
+         \PY{n}{a\PYZus{}k} \PY{o}{=} \PY{l+m+mf}{0.00875}
+         \PY{n}{a\PYZus{}s} \PY{o}{=} \PY{l+m+mf}{0.0004}
+         \PY{n}{bs} \PY{o}{=} \PY{l+m+mf}{0.06}
+         \PY{n}{y1} \PY{o}{=} \PY{n}{odeint}\PY{p}{(}\PY{n}{dK\PYZus{}dS}\PY{p}{,} \PY{n}{y0}\PY{p}{,} \PY{n}{t}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{a\PYZus{}k}\PY{p}{,}\PY{n}{a\PYZus{}s}\PY{p}{,}\PY{n}{bs}\PY{p}{)}\PY{p}{)}
+         \PY{n}{dK}\PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{dS}\PY{o}{=}\PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dK}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dS}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time(s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Concentration (mM)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ComK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ComS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activador\PYZhy{}repressor model for ak = 0.00875, as = 0.0004, βs=0.06}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{len\PYZus{}yS}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dS}\PY{p}{)}
+         \PY{n}{len\PYZus{}yK}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dK}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComS] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dS}\PY{p}{[}\PY{n}{len\PYZus{}yS}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComK] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dK}\PY{p}{[}\PY{n}{len\PYZus{}yK}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dK}\PY{p}{,}\PY{n}{dS}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oscillation when αk = 0.00875, αs = 0.0004, βs=0.06}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ComS] tents to the value:  413.255
+[ComK] tents to the value:  69.892
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Changing the basal expression rate of ComK (αk) value.
+}\label{changing-the-basal-expression-rate-of-comk-ux3b1k-value.}
+
+    \paragraph{When ak= 0.000875, 0.0875, 0.875, 2 and
+10}\label{when-ak-0.000875-0.0875-0.875-2-and-10}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{a\PYZus{}k} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.000875}\PY{p}{,}\PY{l+m+mf}{0.0875}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.875}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{ak} \PY{o+ow}{in} \PY{n}{a\PYZus{}k}\PY{p}{:}
+             \PY{n}{a\PYZus{}s} \PY{o}{=} \PY{l+m+mf}{0.0004}
+             \PY{n}{bs} \PY{o}{=} \PY{l+m+mf}{0.06}
+         
+             \PY{n}{y1} \PY{o}{=} \PY{n}{odeint}\PY{p}{(}\PY{n}{dK\PYZus{}dS}\PY{p}{,} \PY{n}{y0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{ak}\PY{p}{,} \PY{n}{a\PYZus{}s}\PY{p}{,}\PY{n}{bs}\PY{p}{)}\PY{p}{)}
+             \PY{n}{dK} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{dS} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dK}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dS}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time(s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Concentration (mM)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ComK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ComS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activador\PYZhy{}repressor model for αk = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{ak})
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n}{len\PYZus{}yS}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dS}\PY{p}{)}
+             \PY{n}{len\PYZus{}yK}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dK}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{When αk = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{k}{ak})
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComS] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dS}\PY{p}{[}\PY{n}{len\PYZus{}yS}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComK] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dK}\PY{p}{[}\PY{n}{len\PYZus{}yK}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dK}\PY{p}{,} \PY{n}{dS}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ComK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ComS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ComK vs ComS when αk = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{ak}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αk = 0.0009
+[ComS] tents to the value:  413.235
+[ComK] tents to the value:  6.062
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αk = 0.0875
+[ComS] tents to the value:  57.738
+[ComK] tents to the value:  966.31
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αk = 0.5000
+[ComS] tents to the value:  9.642
+[ComK] tents to the value:  1254.614
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αk = 0.8750
+[ComS] tents to the value:  0.448
+[ComK] tents to the value:  5548.956
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αk = 2.0000
+[ComS] tents to the value:  0.499
+[ComK] tents to the value:  9950.873
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_14.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αk = 50.0000
+[ComS] tents to the value:  2.392
+[ComK] tents to the value:  343804.813
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In this system we have the combination of possitive and negative
+feedback, ComK and ComS respectivelly.
+
+Observing the plot above, we can notice that when the basal expression
+rate of ComK gets lower the concentration of ComS does not change
+whereas the concentration of ComK gets lower as well. For instance,
+when: αk = 0.00875 and αk = 0.0009 the concentration of ComS is 413.235
+mM. This may be the reason that there are not oscillation behavior of
+the system since the ComS is supressing the expression of ComK in a
+negative feedback. That stable fixed point corresponds to the vegetative
+state.
+
+However when the basal expression rate of ComK gets higher values ( αk =
+0.0875 to 0.875) we can notice that the concentration of ComS decrease
+significantly (from 57.728 to 0.448) while the concentration on ComK
+gets much higher (from 966.518 to 5548.956 mM). These may be because the
+ComS is not expressed enough to inhibit the expression of ComK. Also, we
+can see that within these values the system is unstable. The system
+exhibits limit cycle oscillations between a mid-ComK and a high-ComK
+level. In this case oscillation of the system is clearer to see. In
+contrast, with lower values of αk there are not oscillation, we can see
+that the curve tends to the 400 mM and there not a recirculation of the
+reaction. But when αk get higher values than 0.5 the oscillation
+dissapear and the system reach a higher concentration of ComK but it
+stays in a stable state whitout concentration changes in ComS and ComK.
+
+    \subsubsection{Changing the basal expression rate of ComS (αs) value
+}\label{changing-the-basal-expression-rate-of-coms-ux3b1s-value}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} solve the ODE problem }
+         \PY{n}{a\PYZus{}s1} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.004}\PY{p}{,}\PY{l+m+mf}{0.05}\PY{p}{,}\PY{l+m+mf}{0.85}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{a\PYZus{}s} \PY{o+ow}{in} \PY{n}{a\PYZus{}s1}\PY{p}{:}
+             \PY{n}{a\PYZus{}k} \PY{o}{=} \PY{l+m+mf}{0.00875}
+             \PY{n}{bs} \PY{o}{=} \PY{l+m+mf}{0.06}
+         
+             \PY{n}{y1} \PY{o}{=} \PY{n}{odeint}\PY{p}{(}\PY{n}{dK\PYZus{}dS}\PY{p}{,} \PY{n}{y0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{a\PYZus{}k}\PY{p}{,} \PY{n}{a\PYZus{}s}\PY{p}{,}\PY{n}{bs}\PY{p}{)}\PY{p}{)}
+             \PY{n}{dK} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{dS} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dK}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dS}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time(s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Concentration (mM)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ComK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ComS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activador\PYZhy{}repressor model for αs =}\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{a\PYZus{}s})
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n}{len\PYZus{}yS}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dS}\PY{p}{)}
+             \PY{n}{len\PYZus{}yK}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dK}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{When αs = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{k}{a\PYZus{}s})
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComS] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dS}\PY{p}{[}\PY{n}{len\PYZus{}yS}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComK] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dK}\PY{p}{[}\PY{n}{len\PYZus{}yK}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dK}\PY{p}{,} \PY{n}{dS}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ComK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ComS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ComK vs ComS αs =}\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{a\PYZus{}s}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             
+             
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αs = 0.0040
+[ComS] tents to the value:  448.558
+[ComK] tents to the value:  72.322
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αs = 0.0500
+[ComS] tents to the value:  904.333
+[ComK] tents to the value:  93.482
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αs = 0.8500
+[ComS] tents to the value:  8899.643
+[ComK] tents to the value:  229.975
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αs = 1.0000
+[ComS] tents to the value:  9801.591
+[ComK] tents to the value:  73256.832
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αs = 2.0000
+[ComS] tents to the value:  19800.797
+[ComK] tents to the value:  74002.184
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_14.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αs = 5.0000
+[ComS] tents to the value:  49800.319
+[ComK] tents to the value:  74452.236
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_18.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When αs = 10.0000
+[ComS] tents to the value:  99800.16
+[ComK] tents to the value:  74602.729
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_20.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Observing the behaviour of the system when we change the value of the
+basal expression rate of ComS, we can notice that raising the value form
+0.0004 to 0.8 the concentration of comS increase significantly faster
+than the concentration of ComK. Once these concentration get its maximum
+value they stay in a stable state. In other words, they do not change
+along the time. So, it makes sense that there are not oscillation in the
+system. However, once the αs is higher than 0.85 the behaviour changes.
+Now we can see that the concentration of ComK increase sharply from 0 to
+74500 nm at a certain moment of time, whereas the concentration of ComS
+remains the same all the time. Although, we can also notice that the
+higher is the αs the higher concentration values comes gets while the
+max concentration of ComK doesn't change, but the time in which comic
+reach its maximum concentration gets smaller. In addition, we can notice
+that the change of the αs does not produce any oscillation state or
+unstable state.
+
+    \subsubsection{Changing unrepressed expression rate of ComS (βs)
+variable:
+}\label{changing-unrepressed-expression-rate-of-coms-ux3b2s-variable}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} solve the ODE problem }
+         \PY{n}{bs1} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.006}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.68}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.92}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{bs} \PY{o+ow}{in} \PY{n}{bs1}\PY{p}{:}
+             \PY{n}{a\PYZus{}s} \PY{o}{=} \PY{l+m+mf}{0.0004}
+             \PY{n}{a\PYZus{}k} \PY{o}{=} \PY{l+m+mf}{0.00875}
+         
+             \PY{n}{y1} \PY{o}{=} \PY{n}{odeint}\PY{p}{(}\PY{n}{dK\PYZus{}dS}\PY{p}{,} \PY{n}{y0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{a\PYZus{}k}\PY{p}{,} \PY{n}{a\PYZus{}s}\PY{p}{,}\PY{n}{bs}\PY{p}{)}\PY{p}{)}
+             \PY{n}{dK} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{dS} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dK}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{dS}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time(s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Concentration (mM)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{comK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ComS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activador\PYZhy{}repressor model for βs = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{bs})
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n}{len\PYZus{}yS}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dS}\PY{p}{)}
+             \PY{n}{len\PYZus{}yK}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dK}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{When βs = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{k}{bs})
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComS] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dS}\PY{p}{[}\PY{n}{len\PYZus{}yS}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ComK] tents to the value: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{dK}\PY{p}{[}\PY{n}{len\PYZus{}yK}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dK}\PY{p}{,} \PY{n}{dS}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ComK vs ComS βs = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{bs}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When βs = 0.0060
+[ComS] tents to the value:  7.817
+[ComK] tents to the value:  10.729
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When βs = 0.2000
+[ComS] tents to the value:  1806.104
+[ComK] tents to the value:  113.96
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When βs = 0.6800
+[ComS] tents to the value:  6603.169
+[ComK] tents to the value:  153.365
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When βs = 0.8000
+[ComS] tents to the value:  7802.285
+[ComK] tents to the value:  162.067
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When βs = 0.9200
+[ComS] tents to the value:  920.625
+[ComK] tents to the value:  54289.4
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_14.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When βs = 2.0000
+[ComS] tents to the value:  30.337
+[ComK] tents to the value:  2004.643
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_18.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+When βs = 10.0000
+[ComS] tents to the value:  9.649
+[ComK] tents to the value:  3614.644
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_20.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In the first plot we can see that when we low the βs value the
+concentration of ComS and ComK decrease significantly, but the first one
+does it faster than the other one. As we can see that the concentration
+of ComK get higher values. Also, we can see that the there is not
+oscillation state, the plot of ComK vs ComS is just a straight line.We
+can notice that when βs increase its value from 0.06 to 0.92 the
+concentration of ComS increase extremely fast and the concentration of
+ComK increase slowly. Within these values the system reaches a steady
+state without changes and no-oscillation.
+
+However, when βs gets values higher than 0.92 we can start seeing some
+changes. The concentration of ComK stays lower than ComS but at a
+certain moment the concentration of ComK increase sharply and as soon as
+this happens the concentration of ComS drops to the minim. Also, in the
+following cases we can easily see that this sharp concentration raise
+happens earlier when βs gets higher values. In addition, we can notice
+that when βs get higher values such as 2 and 10, the concentration on
+ComS tends to be higher than ComK from the first period of time and
+suddenly ComK raises its concentration to its maximum and ComS drops its
+concentration. Also, it is seen how the concentration of ComK becomes
+unstable which it can been seen in the oscillation plot how the system
+is unstable. We can also say that the pick which is seen in the "ComK vs
+ComS" plot when βs= 2 and βs= 10 is due to this both changes of
+concentration.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
